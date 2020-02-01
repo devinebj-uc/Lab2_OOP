@@ -1,13 +1,15 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Calendar;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
-    private Person person;
+    private static Person person;
     private String firstName = "firstName";
     private String lastName = "lastName";
-    private int YOB = 1994;
+    private static int YOB = 1994;
 
     @BeforeEach
     void setup() {
@@ -16,32 +18,29 @@ class PersonTest {
 
     @Test
     void getFullName() {
-        assertEquals(firstName+" "+lastName, person.fullName());
+        assertEquals(firstName+" "+lastName, person.fullName(firstName,lastName));
     }
 
     @Test
     void setYOB() throws Exception {
-        person.setYOB(YOB);
-        assertEquals(YOB, person.getYOB());
+        Person.setYOB(YOB);
+        assertEquals(YOB, person.getYOB(YOB));
     }
 
     @Test
     void calculateAge() {
-        assertEquals(10, Person.calculateAge(2009));
+        assertEquals(11, Person.calculateAge(2009));
     }
 
     @Test
     void getAge() {
-        assertEquals(25, person.getAge());
+        assertEquals(26, person.getAge(YOB));
     }
 
     @Test
     void ageValidation() throws ExceptionInInitializerError {
         ExceptionInInitializerError thrown =
-                assertThrows(ExceptionInInitializerError.class,
-                        () -> person.setYOB(1890),
-                        "Min YOB is 1900");
-
+                assertThrows(ExceptionInInitializerError.class, () -> Person.setYOB(1890), "Min YOB is 1900");
         assertEquals("Min YOB is 1900", thrown.getMessage());
     }
 }
