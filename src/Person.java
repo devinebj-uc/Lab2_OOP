@@ -28,7 +28,7 @@ public class Person {
         return YOB;
     }
 
-    public static void ageValidation(int YOB) throws ExceptionInInitializerError{
+    public static void ageValidation(int YOB){
         if (YOB < 1900) {
             throw new ExceptionInInitializerError("Min YOB is 1900");
         }
