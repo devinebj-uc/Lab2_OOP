@@ -14,6 +14,7 @@ public class Person {
     }
 
     static int calculateAge(int YOB){
+        ageValidation(YOB);
         Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.getWeekYear();
         return currentYear - YOB;
